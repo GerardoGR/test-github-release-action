@@ -81,8 +81,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: bitwarden_rs
         # TODO: Use build matrix
-        asset_path: bitwarden_rs-postgresql-x86_64-unknown-linux-gnu.zip
         asset_name: bitwarden_rs-postgresql-x86_64-unknown-linux-gnu
         asset_content_type: application/octet-stream
 
