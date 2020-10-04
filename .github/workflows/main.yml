@@ -13,9 +13,9 @@ on:
 jobs:
   build:
     name: Build
-    strategy:
+    strategy: 
       fail-fast: false
-      matrix:
+      matrix: &build-matrix
         db-backend: [sqlite, mysql, postgresql]
         target:
           - x86_64-unknown-linux-gnu
@@ -75,26 +75,7 @@ jobs:
     needs: [build, prepare-release]
     strategy:
       fail-fast: false
-      matrix:
-        db-backend: [sqlite, mysql, postgresql]
-        target:
-          - x86_64-unknown-linux-gnu
-          # - x86_64-unknown-linux-musl
-          # - x86_64-apple-darwin
-          # - x86_64-pc-windows-msvc
-        include:
-          - target: x86_64-unknown-linux-gnu
-            os: ubuntu-latest
-            ext:
-          # - target: x86_64-unknown-linux-musl
-          #   os: ubuntu-latest
-          #   ext:
-          # - target: x86_64-apple-darwin
-          #   os: macOS-latest
-          #   ext:
-          # - target: x86_64-pc-windows-msvc
-          #   os: windows-latest
-          #   ext: .exe
+      matrix: *build-matrix
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/download-artifact@v2
